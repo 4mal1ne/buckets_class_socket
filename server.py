@@ -35,3 +35,44 @@ class FiveLBucket(Bucket):
         else:
             three_bucket.water_value += self.water_value
             self.water_value -= self.water_value
+
+
+bucket = Bucket()
+three_l_bucket = ThreeLBucket()
+five_l_bucket = FiveLBucket()
+
+count = 0
+
+template = """
+    1 - налить пятилитровое ведро
+    2 - Налить трёхлитровое ведро
+    3 - вылить пятилитровое ведро
+    4 - вылить трёхлитровое ведро
+    5 - перелить из пятилитрового в трёхлитровое
+    6 - перелить из трёхлитрового в пятилитровое
+"""
+
+while five_l_bucket.water_value != 4:
+    action = input('Enter action: ')
+
+    if action == "1":
+        five_l_bucket.draw_water_in_a_bucket()
+    elif action == "2":
+        three_l_bucket.draw_water_in_a_bucket()
+    elif action == "3":
+        five_l_bucket.empty_the_bucket()
+    elif action == "4":
+        three_l_bucket.empty_the_bucket()
+    elif action == "5":
+        five_l_bucket.pour_water_out_of_the_bucket(three_l_bucket)
+    elif action == "6":
+        three_l_bucket.pour_water_out_of_the_bucket(five_l_bucket)
+    else:
+        print('Action not found.')
+        continue
+    count += 1
+    print(count)
+    print(f"\r{count} шаг: пятилитровое ведро равно: {five_l_bucket.water_value}, "
+          f"трёхлитровое ведро равно: {three_l_bucket.water_value}")
+print(f"Поздравляю! Ты решил эту задачу за {count} ходов и "
+      f"твоё пятилитровое ведро равно {five_l_bucket.water_value} литрам!")
