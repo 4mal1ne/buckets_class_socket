@@ -19,3 +19,19 @@ class ThreeLBucket(Bucket):
             five_bucket.water_value += self.water_value
             self.water_value -= self.water_value
 
+
+class FiveLBucket(Bucket):
+    def draw_water_in_a_bucket(self):
+        self.water_value = 5
+
+    def empty_the_bucket(self):
+        self.water_value = 0
+
+    def pour_water_out_of_the_bucket(self, three_bucket):
+        free_value_of_three_bucket = 3 - three_bucket.water_value
+        if self.water_value >= 3:
+            self.water_value = self.water_value - free_value_of_three_bucket
+            three_bucket.water_value += free_value_of_three_bucket
+        else:
+            three_bucket.water_value += self.water_value
+            self.water_value -= self.water_value
