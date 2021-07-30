@@ -1,6 +1,28 @@
-class Bucket:
+import abc
+import socket
+
+SIZE = 1
+PORT = 9090
+
+sock = socket.socket()
+sock.bind(('', PORT))
+sock.listen(1)
+
+print(f'--- Start listen port {PORT} ---')
+
+
+class Bucket(abc.ABC):
     def __init__(self):
         self.water_value = 0
+
+    @abc.abstractmethod
+    def pour_water_out_of_the_bucket(self, five_bucket):
+        """
+
+        :param five_bucket: A bucket into which water will be poured
+        :return: The remaining amount of water in the bucket
+        """
+        pass
 
 
 class ThreeLBucket(Bucket):
