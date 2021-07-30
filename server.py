@@ -3,23 +3,42 @@ import socket
 
 SIZE = 1
 PORT = 9090
-
-sock = socket.socket()
-sock.bind(('', PORT))
-sock.listen(1)
-
-print(f'--- Start listen port {PORT} ---')
+DATA_PACKAGE_SIZE = 1024
 
 
-class Bucket(abc.ABC):
+def start_server():
+    sock = socket.socket()
+    sock.bind(('', PORT))
+    sock.listen(SIZE)
+
+    print(f'--- Start listen port {PORT} ---')
+
+    connection, client_address = sock.accept()
+    print(f"{client_address} has connected!")
+
+    while 1:
+        data = connection.recv(DATA_PACKAGE_SIZE)
+        if not data:
+            break
+        print(data)
+        connection.sendall(data)
+    sock.close()
+    print("Server has closed")
+
+
+if __name__ == "__main__":
+    start_server()
+
+
+class Bucket:
     def __init__(self):
         self.water_value = 0
 
     @abc.abstractmethod
-    def pour_water_out_of_the_bucket(self, five_bucket):
+    def pour_water_out_of_the_bucket(self, *args):
         """
 
-        :param five_bucket: A bucket into which water will be poured
+        :param args: A bucket into which water will be poured
         :return: The remaining amount of water in the bucket
         """
         pass
@@ -73,6 +92,8 @@ template = """
     5 - перелить из пятилитрового в трёхлитровое
     6 - перелить из трёхлитрового в пятилитровое
 """
+
+print(template)
 
 while five_l_bucket.water_value != 4:
     action = input('Enter action: ')
