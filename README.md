@@ -1,12 +1,12 @@
 # **Socket buckets game**
 ## **Types of possible actions in the game**
-**1 - Pour a five-liter bucket**
+**1 - draw water in a five-liter bucket**
 
-**2 - Pour a three-liter bucket**
+**2 - draw water in a three-liter bucket**
 
-**3 - Pour a five-liter bucket**
+**3 - Empty the five-liter bucket**
 
-**4 - Pour a three-liter bucket**
+**4 - Empty the three-liter bucket**
 
 **5 - Pour from a five-liter bucket into a three-liter bucket**
 
