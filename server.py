@@ -7,6 +7,9 @@ DATA_PACKAGE_SIZE = 1024
 
 
 def start_server():
+    """
+    :return: Building a socket and binding it to a port. Sending data to the client.
+    """
     sock = socket.socket()
     sock.bind(('', PORT))
     sock.listen(SIZE)
@@ -31,7 +34,14 @@ if __name__ == "__main__":
 
 
 class Bucket:
+    """
+    THe main class with one param: The amount of water in the bucket
+    """
+
     def __init__(self):
+        """
+        Initial method. It started when Bucket class would started
+        """
         self.water_value = 0
 
     @abc.abstractmethod
@@ -45,13 +55,27 @@ class Bucket:
 
 
 class ThreeLBucket(Bucket):
+    """
+    The class is a child with three methods and parent inheritance.
+    """
+
     def draw_water_in_a_bucket(self):
+        """
+        :return: When this method is called, the current bucket will be filled.
+        """
         self.water_value = 3
 
     def empty_the_bucket(self):
+        """
+        :return: Calling this method will reset the current bucket to zero.
+        """
         self.water_value = 0
 
     def pour_water_out_of_the_bucket(self, five_bucket):
+        """
+        :param five_bucket: Determines which bucket the water will be poured into.
+        :return: Determines the amount of water when transferred to another bucket.
+        """
         free_value_of_five_bucket = 5 - five_bucket.water_value
         if self.water_value >= free_value_of_five_bucket:
             five_bucket.water_value += free_value_of_five_bucket
@@ -62,13 +86,27 @@ class ThreeLBucket(Bucket):
 
 
 class FiveLBucket(Bucket):
+    """
+    The class is a child with three methods and parent inheritance.
+    """
+
     def draw_water_in_a_bucket(self):
+        """
+        :return: When this method is called, the current bucket will be filled.
+        """
         self.water_value = 5
 
     def empty_the_bucket(self):
+        """
+        :return: Calling this method will reset the current bucket to zero.
+        """
         self.water_value = 0
 
     def pour_water_out_of_the_bucket(self, three_bucket):
+        """
+        :param three_bucket: Determines which bucket the water will be poured into.
+        :return: Determines the amount of water when transferred to another bucket.
+        """
         free_value_of_three_bucket = 3 - three_bucket.water_value
         if self.water_value >= 3:
             self.water_value = self.water_value - free_value_of_three_bucket
@@ -78,9 +116,9 @@ class FiveLBucket(Bucket):
             self.water_value -= self.water_value
 
 
-bucket = Bucket()
-three_l_bucket = ThreeLBucket()
-five_l_bucket = FiveLBucket()
+bucket = Bucket()  # Create an object of a parent class.
+three_l_bucket = ThreeLBucket()  # Create an object of class three-liter bucket
+five_l_bucket = FiveLBucket()  # Create an object of a five-liter bucket class
 
 count = 0
 
